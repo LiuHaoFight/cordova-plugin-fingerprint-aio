@@ -7,6 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -161,19 +163,19 @@ public class BiometricActivity extends AppCompatActivity {
     }
 
     private void onError(int errorCode, @NonNull CharSequence errString) {
-
+        Log.e("BiometricActivity", "onError " + errorCode + " " + errString);
         switch (errorCode)
         {
             case BiometricPrompt.ERROR_USER_CANCELED:
             case BiometricPrompt.ERROR_CANCELED:
-                finishWithError(PluginError.BIOMETRIC_DISMISSED);
-                return;
+//                finishWithError(PluginError.BIOMETRIC_DISMISSED);
+//                return;
             case BiometricPrompt.ERROR_NEGATIVE_BUTTON:
                 // TODO: remove after fix https://issuetracker.google.com/issues/142740104
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P && mPromptInfo.isDeviceCredentialAllowed()) {
-                    showAuthenticationScreen();
-                    return;
-                }
+//                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P && mPromptInfo.isDeviceCredentialAllowed()) {
+//                    showAuthenticationScreen();
+//                    return;
+//                }
                 finishWithError(PluginError.BIOMETRIC_DISMISSED);
                 break;
             case BiometricPrompt.ERROR_LOCKOUT:
